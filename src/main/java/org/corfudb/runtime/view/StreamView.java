@@ -324,6 +324,10 @@ public class StreamView implements AutoCloseable {
         return al.toArray(new ILogUnitEntry[al.size()]);
     }
 
+    public void trim(long prefix) {
+        runtime.getAddressSpaceView().trim(streamID, prefix);
+    }
+
     /**
      * Closes this resource, relinquishing any underlying resources.
      * This method is invoked automatically on object managed by the

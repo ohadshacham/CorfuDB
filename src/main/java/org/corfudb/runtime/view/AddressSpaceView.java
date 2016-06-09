@@ -297,4 +297,18 @@ public class AddressSpaceView extends AbstractView {
         return null;
         });
     }
+
+    public void trim(UUID stream, long prefix) {
+        layoutHelper( l-> {
+        for (Layout.LayoutSegment s : l.getSegments()) {
+            for (Layout.LayoutStripe ls: s.getStripes())
+            {
+                for (String server : ls.getLogServers()) {
+                     l.getRuntime().getRouter(server).getClient(LogUnitClient.class).trim(stream, prefix);
+                }
+            }
+        }
+        return null;
+        });
+    }
 }
